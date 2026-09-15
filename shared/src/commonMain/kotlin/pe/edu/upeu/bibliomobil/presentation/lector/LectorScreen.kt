@@ -6,13 +6,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ErrorOutline
+import androidx.compose.material.icons.filled.Group
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,6 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import pe.edu.upeu.bibliomobil.presentation.components.EstadoVacio
+import pe.edu.upeu.bibliomobil.presentation.components.MensajeExito
+import pe.edu.upeu.bibliomobil.presentation.components.ValidatedTextField
 
 @Composable
 fun LectorScreen(
@@ -53,21 +57,20 @@ fun LectorScreen(
         item {
             when (val fase = uiState.fase) {
                 LectorFase.Cargando -> CargandoLectores()
-                LectorFase.SinLectores -> Text(
-                    text = "Aún no hay lectores registrados",
-                    style = MaterialTheme.typography.bodyLarge
+                LectorFase.SinLectores -> EstadoVacio(
+                    icono = Icons.Default.Group,
+                    titulo = "Sin lectores",
+                    descripcion = "Registra el primer lector para iniciar la cartera."
                 )
                 is LectorFase.ConLectores -> CarteraLectores(fase.lectores)
-                is LectorFase.Error -> Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text(
-                        text = fase.mensaje,
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Button(onClick = viewModel::cargarLectores) {
-                        Text("Reintentar")
-                    }
-                }
+                is LectorFase.Error -> EstadoVacio(
+                    icono = Icons.Default.ErrorOutline,
+                    titulo = fase.mensaje,
+                    descripcion = "Intenta recargar la cartera de lectores para continuar.",
+                    esError = true,
+                    accionTexto = "Reintentar",
+                    onAccion = viewModel::cargarLectores
+                )
             }
         }
     }
@@ -92,42 +95,30 @@ private fun FormularioLectorCard(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text("Registrar lector", style = MaterialTheme.typography.titleLarge)
-            OutlinedTextField(
+            ValidatedTextField(
                 value = formulario.nombre,
                 onValueChange = onNombreChange,
-                label = { Text("Nombre") },
-                isError = formulario.errorNombre != null,
-                supportingText = formulario.errorNombre?.let { { Text(it) } },
-                singleLine = true,
+                label = "Nombre",
+                error = formulario.errorNombre,
                 modifier = Modifier.fillMaxWidth()
             )
-            OutlinedTextField(
+            ValidatedTextField(
                 value = formulario.correo,
                 onValueChange = onCorreoChange,
-                label = { Text("Correo") },
-                isError = formulario.errorCorreo != null,
-                supportingText = formulario.errorCorreo?.let { { Text(it) } },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                label = "Correo",
+                error = formulario.errorCorreo,
+                keyboardType = KeyboardType.Email,
                 modifier = Modifier.fillMaxWidth()
             )
-            OutlinedTextField(
+            ValidatedTextField(
                 value = formulario.telefono,
                 onValueChange = onTelefonoChange,
-                label = { Text("Teléfono") },
-                isError = formulario.errorTelefono != null,
-                supportingText = formulario.errorTelefono?.let { { Text(it) } },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                label = "Teléfono",
+                error = formulario.errorTelefono,
+                keyboardType = KeyboardType.Phone,
                 modifier = Modifier.fillMaxWidth()
             )
-            mensajeExito?.let {
-                Text(
-                    text = it,
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
+            mensajeExito?.let { MensajeExito(it) }
             Button(
                 onClick = onRegistrar,
                 enabled = !registrando,

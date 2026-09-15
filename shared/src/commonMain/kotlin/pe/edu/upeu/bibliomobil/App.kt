@@ -38,14 +38,15 @@ import pe.edu.upeu.bibliomobil.presentation.inicio.InicioScreen
 import pe.edu.upeu.bibliomobil.presentation.lector.LectorScreen
 import pe.edu.upeu.bibliomobil.presentation.libro.LibroScreen
 import pe.edu.upeu.bibliomobil.presentation.prestamo.PrestamoScreen
+import pe.edu.upeu.bibliomobil.theme.BiblioMobilTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
 fun App() {
     KoinContext {
-        MaterialTheme {
-            var modoOscuro by rememberSaveable { mutableStateOf(false) }
+        var modoOscuro by rememberSaveable { mutableStateOf(false) }
+        BiblioMobilTheme(darkTheme = modoOscuro) {
             val screenSaver = Saver<Screen, String>(
                 save = { it.ruta },
                 restore = { Screen.desdeRuta(it) }
