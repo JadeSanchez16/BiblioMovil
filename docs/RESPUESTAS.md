@@ -25,8 +25,8 @@ Resultado Gradle:
 ```text
 > Task :shared:testAndroidHostTest
 
-BUILD SUCCESSFUL in 11s
-33 actionable tasks: 3 executed, 30 up-to-date
+BUILD SUCCESSFUL in 7s
+33 actionable tasks: 4 executed, 29 up-to-date
 ```
 
 Resultado del reporte XML de Gradle:
