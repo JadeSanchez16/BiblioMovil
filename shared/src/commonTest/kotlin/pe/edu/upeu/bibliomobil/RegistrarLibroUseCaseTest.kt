@@ -61,5 +61,15 @@ class RegistrarLibroUseCaseTest {
         assertEquals("Robert Martin", result.getOrThrow().autor)
     }
 
+    @Test
+    fun propagaFalloDelRepositoryComoResultFailure() = runTest {
+        val repository = FakeLibroRepository().apply { fallaRegistrar = true }
+
+        val result = RegistrarLibroUseCase(repository)("Clean Code", "Robert Martin", "1998", "3")
+
+        assertTrue(result.isFailure)
+        assertEquals("Fallo al registrar libro", result.exceptionOrNull()?.message)
+    }
+
     private fun useCase() = RegistrarLibroUseCase(FakeLibroRepository())
 }

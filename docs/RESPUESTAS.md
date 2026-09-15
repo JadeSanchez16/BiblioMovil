@@ -25,8 +25,8 @@ Resultado Gradle:
 ```text
 > Task :shared:testAndroidHostTest
 
-BUILD SUCCESSFUL in 7s
-33 actionable tasks: 4 executed, 29 up-to-date
+BUILD SUCCESSFUL in 12s
+33 actionable tasks: 1 executed, 32 up-to-date
 ```
 
 Resultado del reporte XML de Gradle:
@@ -37,8 +37,9 @@ AppModuleTest: tests=2, failures=0, errors=0
 LibroRepositorioEnMemoriaTest: tests=2, failures=0, errors=0
 LibroViewModelTest: tests=8, failures=0, errors=0
 RegistrarLectorUseCaseTest: tests=5, failures=0, errors=0
-RegistrarLibroUseCaseTest: tests=5, failures=0, errors=0
-LibroDomainTest: tests=6, failures=0, errors=0
+RegistrarLibroUseCaseTest: tests=6, failures=0, errors=0
+LibroDomainTest: tests=4, failures=0, errors=0
+DetallePrestamoTest: tests=3, failures=0, errors=0
 
-Total: 30 pruebas, 0 fallos, 0 errores
+Total: 32 pruebas, 0 fallos, 0 errores
 ```

@@ -1,14 +1,14 @@
-# Capturas pendientes
+# Capturas del examen
 
-No se generaron imágenes falsas. En este entorno Windows no hay un emulador Android disponible para capturar pantallas reales desde la aplicación.
+Evidencias obtenidas desde la aplicación Android ejecutándose en un emulador:
 
-Capturas manuales requeridas:
+1. `01-inicio-claro.png`: Inicio en modo claro.
+2. `02-inicio-oscuro.png`: Inicio en modo oscuro.
+3. `03-libros-cargando.png`: Libros en fase `Cargando`.
+4. `04-libros-sin-libros.png`: Libros en fase `SinLibros`.
+5. `05-libros-con-libros.png`: Libros en fase `ConLibros` con badge de reposición.
+6. `06-libros-error.png`: Libros en fase `Error` con acción Reintentar.
+7. `07-lectores-sin-telefono.png`: lector con teléfono `No registrado`.
+8. `08-prestamos.png`: módulo Préstamos en construcción.
 
-1. Inicio claro.
-2. Inicio oscuro.
-3. Libros Cargando.
-4. Libros SinLibros.
-5. Libros ConLibros.
-6. Libros Error.
-7. Lectores con teléfono ausente mostrando `No registrado`.
-8. Préstamos.
+Las semillas y fallos usados únicamente para capturar estados se retiraron antes de la compilación final.
