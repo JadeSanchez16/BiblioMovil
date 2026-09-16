@@ -12,12 +12,16 @@ Cuando llegue un backend REST cambiaría la capa `data`, agregando implementacio
 
 Si `LibroRepository` fuera `factory`, Koin crearía instancias diferentes; como el repositorio actual guarda datos en memoria, `RegistrarLibroUseCase` podría registrar usando el repository A y `ListarLibrosUseCase` listar usando el repository B, por lo que el libro registrado no aparecería después al listar. Con `single` ambos casos de uso comparten la misma instancia y el estado registrado se conserva.
 
-## Salida real relevante de pruebas
+## Evidencias de interfaz
+
+Las capturas de `docs/CAPTURAS` fueron renovadas desde el emulador Android con el APK final y documentan los ocho estados solicitados: `01-inicio-claro.png`, `02-inicio-oscuro.png`, `03-libros-cargando.png`, `04-libros-sin-libros.png`, `05-libros-con-libros.png`, `06-libros-error.png`, `07-lectores-sin-telefono.png` y `08-prestamos.png`. Para Cargando y Error se usaron variantes temporales permitidas por el examen; el repositorio fue restaurado antes de ejecutar las pruebas y compilaciones finales.
+
+## Salida real final de pruebas
 
 Comando ejecutado:
 
 ```text
-./gradlew :shared:testAndroidHostTest
+.\gradlew.bat :shared:testAndroidHostTest --rerun-tasks --no-configuration-cache --offline
 ```
 
 Resultado Gradle:
@@ -25,8 +29,8 @@ Resultado Gradle:
 ```text
 > Task :shared:testAndroidHostTest
 
-BUILD SUCCESSFUL in 12s
-33 actionable tasks: 1 executed, 32 up-to-date
+BUILD SUCCESSFUL in 54s
+33 actionable tasks: 33 executed
 ```
 
 Resultado del reporte XML de Gradle:
@@ -41,5 +45,5 @@ RegistrarLibroUseCaseTest: tests=6, failures=0, errors=0
 LibroTest: tests=4, failures=0, errors=0
 DetallePrestamoTest: tests=3, failures=0, errors=0
 
-Total: 32 pruebas, 0 fallos, 0 errores
+Total: 32 pruebas, 0 fallos, 0 errores, 0 omitidas
 ```
