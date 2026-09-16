@@ -38,7 +38,7 @@ LibroRepositorioEnMemoriaTest: tests=2, failures=0, errors=0
 LibroViewModelTest: tests=8, failures=0, errors=0
 RegistrarLectorUseCaseTest: tests=5, failures=0, errors=0
 RegistrarLibroUseCaseTest: tests=6, failures=0, errors=0
-LibroDomainTest: tests=4, failures=0, errors=0
+LibroTest: tests=4, failures=0, errors=0
 DetallePrestamoTest: tests=3, failures=0, errors=0
 
 Total: 32 pruebas, 0 fallos, 0 errores
